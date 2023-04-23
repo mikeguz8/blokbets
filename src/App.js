@@ -1,30 +1,11 @@
-
-
-import { RouterProvider } from 'react-router-dom';
-
 import './App.css';
-import router from './Router/Router';
-
-
-
-
-
-
-
+import Main from './layout/Main'
 
 function App() {
 
- 
-
-
   return (
-    <div className="bg-[black] ">  
-   
-       <RouterProvider router={router}></RouterProvider>
-       
-
-    </div>
-  );
+    <Main></Main>
+  )
 }
 
 export default App;

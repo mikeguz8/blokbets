@@ -28,7 +28,11 @@ const Bets = () => {
               </p>
               <h1 className='text-[30px] sm:leading-[50px] mb-6 text-white	 sm:text-[50px] font-semibold '>Offered Bets
             </h1>
-            <Link to={'/link'}><button className='sm:absolute sm:bottom-0 sm:right-0 text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none py-2 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>Link Crypto <br /> wallet</button></Link>
+            <Link to={'/link'}>
+              <button className='sm:absolute sm:bottom-0 sm:right-0 text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none py-2 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>
+                Link Crypto <br /> wallet
+              </button>
+            </Link>
 
 
           </div>
