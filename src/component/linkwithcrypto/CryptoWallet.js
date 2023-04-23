@@ -3,16 +3,10 @@ import { Link } from 'react-router-dom'
 import useTitle from '../../Router/useTitle'
 import Web3 from 'web3';
 
-const CryptoWallet = () => {
-  const [account,setAccount] = useState('Link Crypto Wallet')
+const CryptoWallet = ({account, setAccount, connectWallet}) => {
   useEffect(()=>{
     connectWallet()
   },[])
-const connectWallet = async() =>{
-    const provider = await window.ethereum.enable()
-    const acc = provider.toString()
-    setAccount(acc)
-}
   useTitle('CryptoWallet')
   return (
       <div className='px-8 sm:px-12  py-14'>
