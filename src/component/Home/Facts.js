@@ -9,7 +9,7 @@ const Facts = () => {
       <div className="sm:px-12 ">
              <h1 className='flex items-center'> <div className='bg-[#6fe8e0] h-[2px] w-[80px]'></div> <span className='px-4  sm:text-[48px] text-[30px] sm:leading-[50px] font-semibold'>Facts.</span></h1>
              <p className='text-[#59DCD3] my-4 tracking-wide text-[14px]'>
-             Astonishing Comparison to the sportsbetting industry
+             Astonishing Comparison to the Sportsbetting Industry
               </p>
       </div>
         
@@ -25,7 +25,7 @@ const Facts = () => {
             <div className="flex my-4 items-center">             <img src={rectangle} alt="" />
               <span className='mx-4'>5-30% Implicit Profit</span>  </div>
               <div className="flex my-4 items-center">             <img src={rectangle} alt="" />
-              <span className='mx-4'>For Profit, “Juice”, Fees Charged</span>  </div>
+              <span className='mx-4'>For Profit, “Juice” Fees Charged</span>  </div>
               <div className="flex my-4 items-center">             <img src={rectangle} alt="" />
               <span className='mx-4'>Earning Potential Set by House</span>  </div>
              

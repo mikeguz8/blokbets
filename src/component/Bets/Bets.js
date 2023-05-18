@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import line from './../../assest/img-home/Line.png'
 import arrow1  from './../../assest/img-home/Arrow 1.png'
@@ -6,13 +7,21 @@ import box from './../../assest/img-home/box.png'
 import { FaArrowRight } from "react-icons/fa";
 import useTitle from '../../Router/useTitle'
 
+import { ethers } from 'ethers'
 
 
-const Bets = ({account}) => {
+const Bets = () => {
 
+  const [account, setAccount] = useState(null)
 
   useTitle('Bets')
 
+  const web3Handler = async () => {
+    console.log("web3Handler")
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    console.log("account:", accounts[0])
+    setAccount(accounts[0])
+  }
 
   
   return (
@@ -24,15 +33,16 @@ const Bets = ({account}) => {
 
         <div className=" relative	">
         <p className='text-[#59DCD3] my-2 tracking-wide text-[14px]'>
-               Eliminate The House. Unleash Profit Protential {account}
+               Eliminate The House. Unleash Profit Protential
               </p>
               <h1 className='text-[30px] sm:leading-[50px] mb-6 text-white	 sm:text-[50px] font-semibold '>Offered Bets
             </h1>
-            <Link to={'/link'}>
-              <button className='sm:absolute sm:bottom-0 sm:right-0 text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none py-2 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>
-                Link Crypto <br /> wallet
-              </button>
-            </Link>
+            
+            {account ? (
+                        <button className='sm:absolute sm:bottom-0 sm:right-0 text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none py-2 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>{account.slice(0, 4) + '...' + account.slice(38, 42)}</button>
+                    ) : (
+                      <button onClick={web3Handler} className='sm:absolute sm:bottom-0 sm:right-0 text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none py-2 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>Link Crypto <br /> wallet</button>
+                    )}
 
 
           </div>
@@ -134,7 +144,7 @@ const Bets = ({account}) => {
   <FaArrowRight className='text-white mt-[8px] mx-2  text-[30px] lg:text-[60px]'></FaArrowRight>
 </div>
             </div>
-            <Link to={''}><button className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>BET NOW</button></Link>
+            <button className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>BET NOW</button>
 
             
             
