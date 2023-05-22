@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
+import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import line from './../../assest/img-home/Line.png'
 import arrow1  from './../../assest/img-home/Arrow 1.png'
@@ -9,20 +10,56 @@ import useTitle from '../../Router/useTitle'
 
 import { ethers } from 'ethers'
 
+import BlokBetsAbi from '../../contractsData/BlokBets.json'
+import BlokBetsAddress from '../../contractsData/BlokBets-address.json'
+
+const network = 'sepolia'
+// const network = 'ethereum'
+
+let loadingContracts = false
 
 const Bets = () => {
-
-  const [account, setAccount] = useState(null)
-
   useTitle('Bets')
+  const [account, setAccount] = useState(null)
+  const [blokBets, setBlokBets] = useState(null)
+  const [activeBets, setActiveBets] = useState([])
 
   const web3Handler = async () => {
     console.log("web3Handler")
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     console.log("account:", accounts[0])
     setAccount(accounts[0])
+    
+    const providerTemp = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = providerTemp.getSigner()
+
+    const blokBetsTemp = new ethers.Contract(BlokBetsAddress.address, BlokBetsAbi.abi, signer)
+    setBlokBets(blokBetsTemp)
   }
 
+  const loadContracts = async () => {
+    if(loadingContracts) return
+    loadingContracts = true
+
+    console.log("loadContracts")
+    const providerTemp = new ethers.providers.InfuraProvider(network, process.env.REACT_APP_INFURA_PROJECT_ID);
+    // const providerTemp = new ethers.providers.Web3Provider(window.ethereum)
+
+    const blokBetsTemp = new ethers.Contract(BlokBetsAddress.address, BlokBetsAbi.abi, providerTemp)
+    console.log("blokBetsTemp", blokBetsTemp.address)
+    if (blokBets == null)
+      setBlokBets(blokBetsTemp)
+
+    let activeBetsTemp = await blokBetsTemp.showActiveBets()
+    setActiveBets(activeBetsTemp)
+    console.log("activeBets")
+    console.log(activeBets)
+
+  }
+
+  useEffect(() => {
+    loadContracts()
+  }, [])
   
   return (
     <>
@@ -112,7 +149,16 @@ const Bets = () => {
 
 <div className="">
 
-  <img className='w-[80px] lg:w-[auto]' src={box} alt="" />
+  {/* <Dropdown onSelect={handleDropdownChange}>
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        Dropdown
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item eventKey="option1">Option 1</Dropdown.Item>
+        <Dropdown.Item eventKey="option2">Option 2</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown> */}
   <p className='text-white mt-5'> Select Winner</p>
 
 </div>
