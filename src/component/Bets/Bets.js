@@ -91,7 +91,7 @@ const Bets = () => {
   };
 
   const onChangeChosenAmount = (e) => {
-      setBetAmount(parseInt(e.target.value, 10));
+      setBetAmount(e.target.value, 10);
   }
 
   useEffect(() => {
@@ -213,6 +213,7 @@ const Bets = () => {
       <Form.Control
           type="number"
           value={betAmount}
+          step={.001}
           onChange={onChangeChosenAmount}
           style={{ width: '100px' }}
       />
@@ -237,7 +238,13 @@ const Bets = () => {
   <FaArrowRight className='text-white mt-[8px] mx-2  text-[30px] lg:text-[60px]'></FaArrowRight>
 </div>
             </div>
-            <button onClick={placeBet} className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>BET NOW</button>
+            <button onClick={placeBet} className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>
+              {account == null ? (
+                <>CONNECT WALLET</>
+              ) : (
+                <>BET NOW</>
+              )}
+            </button>
 
             
             
