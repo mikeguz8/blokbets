@@ -13,6 +13,9 @@ import { ethers } from 'ethers'
 import BlokBetsAbi from '../../contractsData/BlokBets.json'
 import BlokBetsAddress from '../../contractsData/BlokBets-address.json'
 
+const fromWei = (num) => ethers.utils.formatEther(num)
+const toWei = (num) => ethers.utils.parseEther(num.toString())
+
 const network = 'sepolia'
 // const network = 'ethereum'
 
@@ -24,7 +27,8 @@ const Bets = () => {
   const [blokBets, setBlokBets] = useState(null)
   const [activeBets, setActiveBets] = useState([])
   const [teamSelected, setTeamSelected] = useState(0)
-  const [betAmount, setBetAmount] = useState(10)
+  const [betAmount, setBetAmount] = useState(0.1)
+  const [lastBetId, setLastBetId] = useState(0)
 
   const web3Handler = async () => {
     console.log("web3Handler")
@@ -40,7 +44,19 @@ const Bets = () => {
   }
 
   const placeBet = async () => {
-    console.log("placeBet", teamSelected, betAmount)
+    if (account == null) {
+      await web3Handler()
+      return
+    }
+    console.log("placeBet", teamSelected, betAmount, lastBetId)
+    
+    try {
+      await(await blokBets.placeBet(lastBetId, teamSelected, {value: toWei(betAmount)})).wait()
+      alert("Bet placed successfully!")
+    } catch (error) {
+        console.error("Custom error handling: " + error);
+        alert(error)
+    }
   }
 
   const loadContracts = async () => {
@@ -61,6 +77,7 @@ const Bets = () => {
     console.log("activeBets")
     console.log(activeBets)
 
+    setLastBetId(parseInt(await blokBetsTemp.betId()) - 1)
   }
 
   const potentialEarnings = () => {
