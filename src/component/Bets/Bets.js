@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import line from './../../assest/img-home/Line.png'
 import arrow1  from './../../assest/img-home/Arrow 1.png'
@@ -23,6 +23,8 @@ const Bets = () => {
   const [account, setAccount] = useState(null)
   const [blokBets, setBlokBets] = useState(null)
   const [activeBets, setActiveBets] = useState([])
+  const [teamSelected, setTeamSelected] = useState(0)
+  const [betAmount, setBetAmount] = useState(10)
 
   const web3Handler = async () => {
     console.log("web3Handler")
@@ -35,6 +37,10 @@ const Bets = () => {
 
     const blokBetsTemp = new ethers.Contract(BlokBetsAddress.address, BlokBetsAbi.abi, signer)
     setBlokBets(blokBetsTemp)
+  }
+
+  const placeBet = async () => {
+    console.log("placeBet", teamSelected, betAmount)
   }
 
   const loadContracts = async () => {
@@ -55,6 +61,20 @@ const Bets = () => {
     console.log("activeBets")
     console.log(activeBets)
 
+  }
+
+  const potentialEarnings = () => {
+    return betAmount * 13
+  }
+
+  const handleDropdownChange = (eventKey) => {
+    setTeamSelected(eventKey);
+    // Perform any desired action based on the selected option
+    console.log('Selected Option:', eventKey);
+  };
+
+  const onChangeChosenAmount = (e) => {
+      setBetAmount(parseInt(e.target.value, 10));
   }
 
   useEffect(() => {
@@ -149,16 +169,16 @@ const Bets = () => {
 
 <div className="">
 
-  {/* <Dropdown onSelect={handleDropdownChange}>
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-        Dropdown
+  <Dropdown onSelect={handleDropdownChange}>
+      <Dropdown.Toggle id="dropdown-basic">
+        Select Winner
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item eventKey="option1">Option 1</Dropdown.Item>
-        <Dropdown.Item eventKey="option2">Option 2</Dropdown.Item>
+        <Dropdown.Item eventKey="0">Option 1</Dropdown.Item>
+        <Dropdown.Item eventKey="1">Option 2</Dropdown.Item>
       </Dropdown.Menu>
-    </Dropdown> */}
+    </Dropdown>
   <p className='text-white mt-5'> Select Winner</p>
 
 </div>
@@ -170,7 +190,17 @@ const Bets = () => {
 
 <div className="">
 
-  <img className='w-[80px] lg:w-[auto]' src={box} alt="" />
+<Form>
+  <Form.Group controlId="formRange" className="d-flex align-items-center justify-content-center">
+      <Form.Label className="me-3">Amount:</Form.Label>
+      <Form.Control
+          type="number"
+          value={betAmount}
+          onChange={onChangeChosenAmount}
+          style={{ width: '100px' }}
+      />
+  </Form.Group>
+  </Form>
   <p className='text-white mt-5'> Bet Amount</p>
 
 </div>
@@ -182,7 +212,7 @@ const Bets = () => {
 
 <div className="">
 
-  <img className='w-[80px] lg:w-[auto]' src={box} alt="" />
+   {potentialEarnings()}
   <p className='text-white mt-5'> Potential Earnings</p>
 
 </div>
@@ -190,7 +220,7 @@ const Bets = () => {
   <FaArrowRight className='text-white mt-[8px] mx-2  text-[30px] lg:text-[60px]'></FaArrowRight>
 </div>
             </div>
-            <button className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>BET NOW</button>
+            <button onClick={placeBet} className='absolute bottom-100 mt-[120px] sm:mt-[60px] lg:mt-0 left-[20%] lg:left-0 sm:left-[40%]  lg:relative text-white uppercase  rounded-none font-normal hover:bg-[#47a09a] outline-none  py-4 px-[60px] text-[10px]  text-normal border-[1px] leading-[20px]  border-[#59DCD3]'>BET NOW</button>
 
             
             
