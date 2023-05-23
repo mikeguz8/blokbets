@@ -29,6 +29,7 @@ const Bets = () => {
   const [teamSelected, setTeamSelected] = useState(0)
   const [betAmount, setBetAmount] = useState(0.1)
   const [lastBetId, setLastBetId] = useState(0)
+  const [lastBet, setLastBet] = useState(null)
 
   const web3Handler = async () => {
     console.log("web3Handler")
@@ -72,12 +73,24 @@ const Bets = () => {
     if (blokBets == null)
       setBlokBets(blokBetsTemp)
 
-    let activeBetsTemp = await blokBetsTemp.showActiveBets()
-    setActiveBets(activeBetsTemp)
-    console.log("activeBets")
-    console.log(activeBets)
+    parseLastBetId(blokBetsTemp)
+  }
 
-    setLastBetId(parseInt(await blokBetsTemp.betId()) - 1)
+  const parseLastBetId = async (blokBets) => {
+    console.log("parseLastBetId")
+
+    let activeBetsTemp = await blokBets.showActiveBets()
+    setActiveBets(activeBetsTemp)
+    console.log("activeBetsTemp")
+    console.log(activeBetsTemp)
+
+    setLastBetId(parseInt(await blokBets.betId()) - 1)
+
+    let lastBetIndex = activeBetsTemp.length - 1;
+    let lastBet = activeBetsTemp[lastBetIndex]
+    console.log("lastBet", lastBet)
+
+    setLastBet(lastBet)
   }
 
   const potentialEarnings = () => {
@@ -92,6 +105,12 @@ const Bets = () => {
 
   const onChangeChosenAmount = (e) => {
       setBetAmount(e.target.value, 10);
+  }
+
+  const minutesLeft = (seconds) => {
+    let dateNow = Math.floor(Date.now() / 1000)
+    let minutesCount = Math.floor((seconds - dateNow) / 60)
+    return minutesCount
   }
 
   useEffect(() => {
@@ -133,24 +152,30 @@ const Bets = () => {
       </div>
 
       <div className="bg-[#121212] px-8 sm:px-12  py-14">
-      <div className="sm:px-12 ">
-             <h1 className='flex items-center'> <div className='bg-[#6fe8e0] h-[2px] w-[80px]'></div> <span className='px-4  sm:text-[40px] text-[30px] text-white sm:leading-[45px] font-semibold'>UFC: Usman V. Edwards.</span></h1>
-             <p className='text-white my-4 sm:ml-[90px] tracking-wide text-[14px]'>
-             Time Left to Bet: <span className='text-[#59DCD3] '>124 Minutes</span>
-          </p>
-      </div>
+        
+      {lastBet != null ? (
+        <div className="sm:px-12 ">
+              <h1 className='flex items-center'> <div className='bg-[#6fe8e0] h-[2px] w-[80px]'></div> 
+              <span className='px-4  sm:text-[40px] text-[30px] text-white sm:leading-[45px] font-semibold'>{lastBet[1]} V. {lastBet[2]}</span></h1>
+              <p className='text-white my-4 sm:ml-[90px] tracking-wide text-[14px]'>
+              Time Left to Bet: <span className='text-[#59DCD3] '>{minutesLeft(parseInt(lastBet[3]))} Minutes</span>
+            </p>
+        </div>
+      ) : (
+        <div style={{color: "white"}}>No current active bet</div>
+      )}
         
         
       </div>
 
 
       <div className="px-8 sm:px-12  py-14">
+          {lastBet != null ? (
         <div className="sm:px-12">
-
 
           <div className="w-full  mx-auto sm:w-[70%]">
            
-            <div className="flex px-1 my-2 text-white text-[25px] justify-between"><p>Usman</p> <p>Edwards</p></div>
+            <div className="flex px-1 my-2 text-white text-[25px] justify-between"><p>{lastBet[1]}</p> <p>{lastBet[2]}</p></div>
             <img className='w-[100%] py-4' src={line} alt="" /> 
             <div className="grid px-2  grid-cols-3 ">
 <div>
@@ -186,14 +211,14 @@ const Bets = () => {
 
 <div className="">
 
-  <Dropdown onSelect={handleDropdownChange}>
+  <Dropdown onSelect={handleDropdownChange} style={{color: "white"}}>
       <Dropdown.Toggle id="dropdown-basic">
         Select Winner
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item eventKey="0">Option 1</Dropdown.Item>
-        <Dropdown.Item eventKey="1">Option 2</Dropdown.Item>
+        <Dropdown.Item eventKey="0">{lastBet[1]}</Dropdown.Item>
+        <Dropdown.Item eventKey="1">{lastBet[2]}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   <p className='text-white mt-5'> Select Winner</p>
@@ -209,7 +234,6 @@ const Bets = () => {
 
 <Form>
   <Form.Group controlId="formRange" className="d-flex align-items-center justify-content-center">
-      <Form.Label className="me-3">Amount:</Form.Label>
       <Form.Control
           type="number"
           value={betAmount}
@@ -228,7 +252,7 @@ const Bets = () => {
             </div>
             <div className="flex ">
 
-<div className="">
+<div className="" style={{color: "white"}}>
 
    {potentialEarnings()}
   <p className='text-white mt-5'> Potential Earnings</p>
@@ -254,6 +278,9 @@ const Bets = () => {
 
 
         </div>
+          ) : (
+            <div style={{color: "white"}}>No current active bet</div>
+          )}
       </div>
 
 
