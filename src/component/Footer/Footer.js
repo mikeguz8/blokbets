@@ -51,8 +51,7 @@ const Footer = () => {
               </div>
               <div className="flex sm-w[62%] justify-center items-center overflow-hidden ">
                   <span className='font-normal  md:px-4 text-white'>Home</span>
-                  <span className=' font-normal px-1 md:px-4  text-white'>Login</span>
-                  <span className=' font-normal px-1 sm:px-4 text-white'>Register</span>
+                  
                   <span className='font-normal sm:px-4 text-white'>Legal</span>
               </div>
 </footer> 

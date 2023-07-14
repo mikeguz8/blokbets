@@ -47,54 +47,6 @@ const Header = () => {
       </li>
 
 
-      {
-              user?.uid ?
-        ''
-          :
-          
-          <>
-              <li>
-              <NavLink
-                to='/login'
-                aria-label='Shows'
-                title='Home'
-                className={({ isActive }) =>
-                  isActive
-                    ? 'font-normal my-2 lg:my-0 tracking-wide text-[#59DCD3]  capitalize transition-colors duration-200 hover:text-deep-purple-accent-400'
-                    : 'font-normal my-2 lg:my-0  tracking-wide text-[#e6e7e7] capitalize transition-colors duration-200 hover:text-deep-purple-accent-400'
-                }
-        >
-          
-          Login
-              </NavLink>
-      </li>
-
-      <li>
-
-              <NavLink
-                to='/register'
-                aria-label='blog'
-                title='Home'
-                className={({ isActive }) =>
-                  isActive
-                    ? 'font-normal my-2 lg:my-0  tracking-wide capitalize text-[#59DCD3]  transition-colors duration-200 hover:text-deep-purple-accent-400'
-                    : 'font-normal  my-2 lg:my-0 tracking-wide capitalize text-[#e6e7e7] transition-colors duration-200 hover:text-deep-purple-accent-400'
-                }
-              >
-                Register
-              </NavLink>
-      </li>
-
-
-
-         
-                      
-</>
-
-}
-
-
-    
 
 
       <li>

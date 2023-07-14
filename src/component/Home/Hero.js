@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+
+
 import { AuthContext } from '../../auth/AuthProvider'
 import { FcButtingIn,FcBusinesswoman,FcOnlineSupport,FcNightPortrait } from "react-icons/fc";
 
 
 const Hero = () => {
 
+  
     
   const { user, logout } = useContext(AuthContext);
   const handleLogOut = () => {
@@ -59,4 +62,8 @@ const Hero = () => {
   )
 }
 
+
+
 export default Hero
+
+

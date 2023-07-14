@@ -32,6 +32,8 @@ import Main from '../layout/Main'
            path: '/home',
            element:<Home></Home>
             },
+            
+            /*
             {
                 path: '/login',
                 element:<Login></Login>
@@ -40,7 +42,7 @@ import Main from '../layout/Main'
                 path: '/register',
                 element: <Register></Register>
             },
-              
+            */  
 
             {
                 path: '/bets',
