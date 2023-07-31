@@ -1,0 +1,14 @@
+
+{
+    "bets events created": 
+    [{
+        "betId": 1,
+        "teamA": "teamAAA",
+        "teamB": "teamBBB",
+        "winnerTeam": 0,
+        "closingTime": ,
+        "endingTime": , 
+        "betValue": ,
+        "minBet": 
+    }]
+}
