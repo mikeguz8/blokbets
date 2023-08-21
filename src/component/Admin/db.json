@@ -1,5 +1,14 @@
 
+
+
 {
+    "name": "John Doe",
+    "age": 30,
+    "occupation": "Developer"
+  }
+
+
+  {
     "bets events created": 
     [{
         "betId": 1,

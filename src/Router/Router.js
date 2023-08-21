@@ -8,6 +8,7 @@ import Error from '../component/error/Error'
 import GettinStarted from '../component/GettingStarted/GettinStarted'
 import Home from '../component/Home/Home'
 import Legal from '../component/Legal/Legal'
+import Admin from '../component/Admin/Admin'
 import CryptoWallet from '../component/linkwithcrypto/CryptoWallet'
 import Login from '../component/Login/Login'
 import Register from '../component/Register/Register'
@@ -70,6 +71,11 @@ import Main from '../layout/Main'
           {
             path: '/dashboard',
             element:<AccountDashboard></AccountDashboard>
+          },
+
+          {
+            path: '/admin',
+            element:<Admin></Admin>
           }
      
         ]
