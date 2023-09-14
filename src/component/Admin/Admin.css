@@ -1,0 +1,124 @@
+
+.container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .container1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    border: solid;
+    border: width 1px;
+    border-color: white;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .match {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    border-radius: 10px;
+    border-color:white;
+  }
+  
+  .match-content {
+    display: flex;
+    position: relative;
+    color: white;
+  }
+  
+  .column1 {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    color: white;
+  }
+
+  .column2 {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    color: white;
+  }
+
+  .column3 {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    color: white;
+  }
+
+  .column4 {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    color: white;
+  }
+  
+  .match-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+  
+  .match-score {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  .match-score-number {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    color: white;
+  }
+  
+  .match-score-divider {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+  }
+  
+  .team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .team-name {
+    text-align: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
